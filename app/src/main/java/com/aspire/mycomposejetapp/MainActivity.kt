@@ -1,6 +1,8 @@
 package com.aspire.mycomposejetapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -27,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
@@ -54,6 +57,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     var email by remember { mutableStateOf(TextFieldValue("")) }
     var password by remember { mutableStateOf(TextFieldValue("")) }
+    val context = LocalContext.current
     Column(
         Modifier
             .fillMaxSize()
@@ -96,8 +100,12 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             Spacer(Modifier.height(30.dp))
             Button(
                 onClick = {
-                    //TODO
-                }, Modifier.fillMaxWidth().padding(20.dp)
+                    val intent = Intent(context, JetTipActivity::class.java)
+                    context.startActivity(intent)
+
+                }, Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp)
             ) {
                 Text("Login")
             }
@@ -108,10 +116,11 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    MyComposeJetAppTheme  {
+    MyComposeJetAppTheme {
         Greeting("Android")
     }
 }

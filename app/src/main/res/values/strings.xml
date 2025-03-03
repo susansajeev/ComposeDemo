@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyComposeJetApp</string>
+    <string name="title_activity_jet_tip">jetTipActivity</string>
 </resources>
