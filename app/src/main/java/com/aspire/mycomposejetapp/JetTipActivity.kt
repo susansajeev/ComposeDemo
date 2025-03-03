@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
@@ -31,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
@@ -110,8 +114,8 @@ fun SetTip(modifier: Modifier = Modifier) {
                     .fillMaxWidth()
                     .background(Color.White)
                     .padding(20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+
+                ) {
 
                 OutlinedTextField(
                     value = billNo,
@@ -122,7 +126,50 @@ fun SetTip(modifier: Modifier = Modifier) {
                 )
                 Spacer(Modifier.height(10.dp))
 
-                Row {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+
+                    Text("Split ")
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+
+                        Image(
+                            painter = painterResource(R.drawable.logo),
+                            contentDescription = "",
+                            modifier = Modifier.size(25.dp)
+                        )
+                        Spacer(Modifier.width(20.dp))
+
+                        Text("12 ")
+
+                        Spacer(Modifier.width(20.dp))
+
+                        Image(
+                            painter = painterResource(R.drawable.logo),
+                            contentDescription = "",
+                            modifier = Modifier.size(25.dp)
+                        )
+                    }
+
+
+                }
+
+                Spacer(Modifier.height(20.dp))
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+
+                    Text("Tip ")
+
+
+                    Text("$12.00 ", modifier = Modifier.padding(0.dp,0.dp,20.dp,0.dp))
 
                 }
 
