@@ -13,7 +13,12 @@
         android:theme="@style/Theme.MyComposeJetApp"
         tools:targetApi="31">
         <activity
-            android:name=".jetTipActivity"
+            android:name=".MoviesListActivity"
+            android:exported="false"
+            android:label="@string/title_activity_movies_list"
+            android:theme="@style/Theme.MyComposeJetApp" />
+        <activity
+            android:name=".JetTipActivity"
             android:exported="false"
             android:label="@string/title_activity_jet_tip"
             android:theme="@style/Theme.MyComposeJetApp" />

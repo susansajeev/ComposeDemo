@@ -1,5 +1,8 @@
 package com.aspire.mycomposejetapp
 
+import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,9 +23,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,9 +36,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -43,8 +50,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aspire.mycomposejetapp.ui.theme.MyComposeJetAppTheme
+import kotlinx.coroutines.processNextEventInCurrentThread
 
 class JetTipActivity : ComponentActivity() {
+    lateinit var contextV : Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -60,42 +69,45 @@ class JetTipActivity : ComponentActivity() {
 }
 
 @Composable
-fun SetTip(modifier: Modifier = Modifier) {
+fun SetTip(modifier: Modifier = Modifier, totalPerson: Double = 134.09) {
 
     var billNo by remember { (mutableStateOf(TextFieldValue(""))) }
+    val total = "%.2f".format(totalPerson)
+    var context = LocalContext.current
+    var sliderPositionVal by remember { mutableStateOf(2f) }
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(30.dp)
-                .border(2.dp, Color.Black, RectangleShape),
+                .padding(25.dp)
+                .clip(RoundedCornerShape(20.dp)),
 
             contentAlignment = Alignment.Center
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.Cyan)
+                    .background(Color(0xFFE9D7F7))
                     .padding(20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     "Total per Person",
                     modifier = Modifier,
-                    fontSize = 23.sp,
-                    fontWeight = FontWeight.Bold
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Black
                 )
                 Spacer(Modifier.height(10.dp))
                 Text(
-                    "$230.09",
+                    "$$total",
                     modifier = Modifier,
                     fontSize = 23.sp,
                     fontWeight = FontWeight.Bold,
-
+                    color = Color.Black
                     )
             }
 
@@ -105,7 +117,8 @@ fun SetTip(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(30.dp)
-                .border(2.dp, Color.Black, RectangleShape),
+                .clip(RoundedCornerShape(8.dp))
+                .border(2.dp, Color.LightGray, RectangleShape),
 
             contentAlignment = Alignment.Center
         ) {
@@ -138,7 +151,7 @@ fun SetTip(modifier: Modifier = Modifier) {
                     ) {
 
                         Image(
-                            painter = painterResource(R.drawable.logo),
+                            painter = painterResource(R.drawable.add),
                             contentDescription = "",
                             modifier = Modifier.size(25.dp)
                         )
@@ -149,7 +162,7 @@ fun SetTip(modifier: Modifier = Modifier) {
                         Spacer(Modifier.width(20.dp))
 
                         Image(
-                            painter = painterResource(R.drawable.logo),
+                            painter = painterResource(R.drawable.minus),
                             contentDescription = "",
                             modifier = Modifier.size(25.dp)
                         )
@@ -167,21 +180,34 @@ fun SetTip(modifier: Modifier = Modifier) {
                 ) {
 
                     Text("Tip ")
-
-
-                    Text("$12.00 ", modifier = Modifier.padding(0.dp,0.dp,20.dp,0.dp))
+                    Text("$12.00 ", modifier = Modifier.padding(0.dp, 0.dp, 20.dp, 0.dp))
 
                 }
 
+                Text("$sliderPositionVal %", Modifier.align(Alignment.CenterHorizontally))
+                Slider(value = sliderPositionVal,
+                    onValueChange = {
+                        sliderPositionVal = it
+                        calculateTotalPerson(sliderPositionVal, context)
+                    }, steps = 5
+
+                )
             }
 
 
         }
-
     }
 }
 
-@Preview(showBackground = true)
+fun calculateTotalPerson(sliderPositionVal: Float, context: Context) {
+
+    val intent = Intent(context , MoviesListActivity::class.java)
+    context.startActivity(intent)
+
+}
+
+@Preview(name = "Light Mode")
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun SetTipPreview() {
     MyComposeJetAppTheme {
