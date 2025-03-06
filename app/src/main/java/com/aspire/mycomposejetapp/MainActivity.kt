@@ -35,6 +35,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.aspire.mycomposejetapp.navigation.MovieNavigation
 import com.aspire.mycomposejetapp.ui.theme.MyComposeJetAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,85 +43,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyComposeJetAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                MovieNavigation()
+
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    var email by remember { mutableStateOf(TextFieldValue("")) }
-    var password by remember { mutableStateOf(TextFieldValue("")) }
-    val context = LocalContext.current
-    Column(
-        Modifier
-            .fillMaxSize()
-            .background(color = Color.Transparent),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly
-    ) {
 
-        Image(
-            painter = painterResource(R.drawable.logo),
-            contentDescription = ""
-        )
-
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-
-            Text(
-                "My Compose",
-                style = MaterialTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.tertiaryContainer,
-
-                )
-            Spacer(Modifier.height(15.dp))
-
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
-            )
-
-            Spacer(Modifier.height(30.dp))
-
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Password") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-            )
-            Spacer(Modifier.height(30.dp))
-            Button(
-                onClick = {
-                    val intent = Intent(context, JetTipActivity::class.java)
-                    context.startActivity(intent)
-
-                }, Modifier
-                    .fillMaxWidth()
-                    .padding(20.dp)
-            ) {
-                Text("Login")
-            }
-
-        }
-
-    }
-
-}
 
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     MyComposeJetAppTheme {
-        Greeting("Android")
+        MovieNavigation()
     }
 }
