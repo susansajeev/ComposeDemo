@@ -32,9 +32,7 @@ fun MovieNoteTestFields(
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
             .padding(26.dp),
-        verticalArrangement = Arrangement.Center
     ) {
         TextField(
             value = text1,

@@ -6,7 +6,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.aspire.mycomposejetapp.MainActivity
 import com.aspire.mycomposejetapp.model.Movie
 import com.aspire.mycomposejetapp.screens.home.LoginScreen
 import com.aspire.mycomposejetapp.screens.home.prelogin.DetailScreen
