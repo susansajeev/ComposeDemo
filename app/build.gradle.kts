@@ -66,8 +66,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation (libs.androidx.room.runtime)
-    annotationProcessor (libs.androidx.room.compiler)
     implementation ("androidx.room:room-ktx:2.6.1")
+    // If using Kotlin
+    kapt ("androidx.room:room-compiler:2.6.1")
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)

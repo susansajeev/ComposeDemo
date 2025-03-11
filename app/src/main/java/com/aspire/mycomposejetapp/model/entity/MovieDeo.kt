@@ -20,5 +20,5 @@ interface MovieDeo {
     suspend fun delete(person: MovieTB)
 
     @Query("SELECT * FROM movie_tb ORDER BY id ASC")
-    suspend fun getAllPersons(): Flow<List<MovieTB>>
+    fun getAllPersons(): Flow<List<MovieTB>>
 }
