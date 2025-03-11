@@ -76,4 +76,9 @@ dependencies {
     // Hilt support for ViewModel in Compose
     implementation (libs.androidx.hilt.navigation.compose)
     implementation(libs.kotlinx.coroutines.android)
+
+    implementation (libs.gson.v291)
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
 }
